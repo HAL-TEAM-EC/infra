@@ -1,20 +1,22 @@
 terraform {
+  required_version = ">= 1.5.0"
+
   required_providers {
     aws = {
       source  = "hashicorp/aws"
-      version = "~> 5.0"
+      version = ">= 5.50, < 5.60"
+    }
+    random = {
+      source  = "hashicorp/random"
+      version = "~> 3.6"
     }
   }
 }
 
 provider "aws" {
-  region = "ap-northeast-1"
-  
-  
+  region = var.aws_region
+
   default_tags {
-    tags = {
-      Project     = "HAL-TEAM-EC"
-      Environment = "dev"
-    }
+    tags = local.common_tags
   }
 }
